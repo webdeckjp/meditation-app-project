@@ -35,9 +35,9 @@ const app = () => {
   timeSelect.forEach((option) => {
     option.addEventListener("click", function () {
       fakeDuration = this.getAttribute("data-time");
-      timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${Math.floor(
-        fakeDuration % 60
-      )}`;
+      timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${
+        "0" + Math.floor(fakeDuration % 60)
+      }`;
     });
   });
 
@@ -60,6 +60,13 @@ const app = () => {
     let elapsed = fakeDuration - currentTime;
     let seconds = Math.floor(elapsed % 60);
     let minutes = Math.floor(elapsed / 60);
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
 
     //animate time circle
     let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
